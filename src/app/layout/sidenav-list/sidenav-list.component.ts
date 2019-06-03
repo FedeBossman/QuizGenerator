@@ -11,6 +11,7 @@ export class SidenavListComponent implements OnInit {
   private navItemClicked: EventEmitter<void> = new EventEmitter<void>();
 
   links: { name: string, ref: string, icon: string }[] = [
+    {name: 'Home', ref: '', icon: 'home'},
     {name: 'Login', ref: 'auth/login', icon: 'input'},
     {name: 'Signup', ref: 'auth/signup', icon: 'person_add'},
   ];
