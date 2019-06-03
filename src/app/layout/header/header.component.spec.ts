@@ -24,4 +24,10 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit a toggleSidenav event onToggleSidenav', () => {
+    const spy = spyOn(component.toggleSidenav, 'emit').and.callThrough();
+    component.onToggleSidenav();
+    expect(spy).toHaveBeenCalled();
+  });
 });

@@ -8,7 +8,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 export class SidenavListComponent implements OnInit {
 
   @Output()
-  private navItemClicked: EventEmitter<void> = new EventEmitter<void>();
+  navItemClicked: EventEmitter<void> = new EventEmitter<void>();
 
   links: { name: string, ref: string, icon: string }[] = [
     {name: 'Home', ref: '', icon: 'home'},

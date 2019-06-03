@@ -25,4 +25,10 @@ describe('SidenavListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit a navItemClicked event onNavItemClicked', () => {
+    const spy = spyOn(component.navItemClicked, 'emit').and.callThrough();
+    component.onNavItemClicked();
+    expect(spy).toHaveBeenCalled();
+  });
 });
