@@ -1,9 +1,13 @@
 <mat-sidenav-container>
-  <mat-sidenav opened="true" #sidenav role="navigation">
+  <mat-sidenav opened="false" #sidenav role="navigation">
     This be da sidenav
   </mat-sidenav>
   <mat-sidenav-content>
-    <button (click)="sidenav.toggle()">Show sidenav</button>
-    <router-outlet></router-outlet>
+    <mat-toolbar color="primary">
+      <div><button (click)="onToggle()"> <mat-icon color="accent">menu</mat-icon> </button></div>
+    </mat-toolbar>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
