@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidenavListComponent } from './sidenav-list.component';
+import {SharedModule} from '../../shared/shared.module';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SidenavListComponent', () => {
   let component: SidenavListComponent;
@@ -8,6 +10,7 @@ describe('SidenavListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [SharedModule, RouterTestingModule],
       declarations: [ SidenavListComponent ]
     })
     .compileComponents();
