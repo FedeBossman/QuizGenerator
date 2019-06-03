@@ -1,11 +1,9 @@
 <mat-sidenav-container>
   <mat-sidenav opened="false" #sidenav role="navigation">
-    This be da sidenav
+    <app-sidenav-list (navItemClicked)="onNavItemClicked()"></app-sidenav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <div><button (click)="onToggle()"> <mat-icon color="accent">menu</mat-icon> </button></div>
-    </mat-toolbar>
+    <app-header (toggleSidenav)="onToggleSidenav()"></app-header>
     <main>
       <router-outlet></router-outlet>
     </main>

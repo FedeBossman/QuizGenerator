@@ -11,7 +11,11 @@ export class AppComponent {
 
   title = 'fitness-tracker';
 
-  onToggle() {
+  onToggleSidenav() {
     this.sidenav.toggle();
+  }
+
+  onNavItemClicked() {
+    this.sidenav.close();
   }
 }
