@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: 'tests',
+    loadChildren: () =>
+      import('./modules/dynamic-tests/dynamic-tests.module').then(m => m.DynamicTestsModule),
+  },
 ];
 
 @NgModule({
