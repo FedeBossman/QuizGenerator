@@ -4,6 +4,7 @@ import {CreateTestComponent} from './create-test.component';
 import {SharedModule} from '../../../../shared/shared.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewQuestionComponent} from '../../components/new-question/new-question.component';
+import {TestSummaryComponent} from '../../components/test-summary/test-summary.component';
 
 describe('CreateTestComponent', () => {
   let component: CreateTestComponent;
@@ -12,7 +13,7 @@ describe('CreateTestComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule],
-      declarations: [CreateTestComponent, NewQuestionComponent]
+      declarations: [CreateTestComponent, NewQuestionComponent, TestSummaryComponent]
     })
       .compileComponents();
   }));

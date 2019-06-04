@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TestSummaryComponent } from './test-summary.component';
+import {SharedModule} from '../../../../shared/shared.module';
+import {DynamicTest} from '../../../../shared/models/dynamic-test';
 
 describe('TestSummaryComponent', () => {
   let component: TestSummaryComponent;
@@ -8,6 +10,7 @@ describe('TestSummaryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [SharedModule],
       declarations: [ TestSummaryComponent ]
     })
     .compileComponents();
@@ -16,6 +19,7 @@ describe('TestSummaryComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TestSummaryComponent);
     component = fixture.componentInstance;
+    component.test = new DynamicTest();
     fixture.detectChanges();
   });
 
