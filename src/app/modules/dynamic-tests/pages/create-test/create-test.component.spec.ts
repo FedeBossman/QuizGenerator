@@ -1,8 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CreateTestComponent } from './create-test.component';
+import {CreateTestComponent} from './create-test.component';
 import {SharedModule} from '../../../../shared/shared.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {NewQuestionComponent} from '../../components/new-question/new-question.component';
 
 describe('CreateTestComponent', () => {
   let component: CreateTestComponent;
@@ -11,9 +12,9 @@ describe('CreateTestComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule],
-      declarations: [ CreateTestComponent ]
+      declarations: [CreateTestComponent, NewQuestionComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

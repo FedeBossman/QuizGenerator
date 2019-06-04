@@ -34,7 +34,6 @@ export class NewQuestionPresenter {
   }
 
   newAnswer() {
-    console.log(this.answers);
     this.answers = [...this.answers, {viewValue: '', value: uuid()}];
   }
 
