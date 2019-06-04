@@ -28,13 +28,16 @@
         </button>
       </div>
 
-      <mat-form-field *ngFor="let answer of answers">
+      <mat-form-field *ngFor="let answer of (this.presenter.$answers | async); trackBy: trackAnswers">
         <input
           matInput
           [ngModel]="answer.viewValue"
           (ngModelChange)="onAnswerChanged($event, answer)"
         >
-        <button mat-icon-button matSuffix [attr.aria-label]="'Remove answer'">
+        <button
+          mat-icon-button matSuffix [attr.aria-label]="'Remove answer'"
+          (click)="onRemoveAnswer(answer)"
+        >
           <mat-icon>remove</mat-icon>
         </button>
       </mat-form-field>
@@ -50,7 +53,7 @@
     <mat-card-subtitle>{{statement}}</mat-card-subtitle>
     <mat-card-content>
       <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="16px">
-        <mat-radio-button *ngFor="let answer of answers" [value]="answer.value">
+        <mat-radio-button *ngFor="let answer of (this.presenter.$answers | async)" [value]="answer.value">
           {{answer.viewValue}}
         </mat-radio-button>
       </mat-radio-group>
