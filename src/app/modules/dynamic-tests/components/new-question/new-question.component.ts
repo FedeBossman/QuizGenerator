@@ -11,15 +11,12 @@ import {NewQuestionPresenter} from './new-question.presenter';
 })
 export class NewQuestionComponent implements OnInit {
 
-  defaultQuestionType = QuestionType.SINGLE;
   questionTypes = [
     {value: QuestionType.SINGLE, viewValue: 'Single response'},
     {value: QuestionType.MULTI, viewValue: 'Multiple responses'},
     {value: QuestionType.TEXT, viewValue: 'Text response'},
     {value: QuestionType.NUMBER, viewValue: 'Number response'},
   ];
-
-  statement: string;
 
   constructor(public presenter: NewQuestionPresenter) {
   }
@@ -29,7 +26,7 @@ export class NewQuestionComponent implements OnInit {
   }
 
   onStatementChange($event: any) {
-    this.statement = $event;
+    this.presenter.changeStatement($event);
   }
 
   trackAnswers(index, answer) {

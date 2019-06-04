@@ -18,7 +18,7 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then(m => m.AuthModule),
   },
   {
-    path: 'tests',
+    path: 'test',
     loadChildren: () =>
       import('./modules/dynamic-tests/dynamic-tests.module').then(m => m.DynamicTestsModule),
   },
