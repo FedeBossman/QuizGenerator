@@ -12,7 +12,7 @@ import {
   MatSidenavModule,
   MatTabsModule,
   MatToolbarModule,
-  MatSelectModule, MatRadioModule, MatTooltipModule,
+  MatSelectModule, MatRadioModule, MatTooltipModule, MatTableModule,
 } from '@angular/material';
 
 @NgModule({
@@ -32,6 +32,7 @@ import {
     MatSelectModule,
     MatRadioModule,
     MatTooltipModule,
+    MatTableModule,
   ],
   exports: [
     MatButtonModule,
@@ -49,6 +50,7 @@ import {
     MatSelectModule,
     MatRadioModule,
     MatTooltipModule,
+    MatTableModule,
   ]
 })
 export class MaterialModule {

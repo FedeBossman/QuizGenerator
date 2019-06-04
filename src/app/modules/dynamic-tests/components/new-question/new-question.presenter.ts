@@ -2,10 +2,14 @@ import {Answer} from '../../../../shared/models/answer';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {v4 as uuid} from 'uuid';
 import {Question} from '../../../../shared/models/question';
+import {QuestionType} from '../../../../shared/models/question-type';
 
 export class NewQuestionPresenter {
-  questionSubject: BehaviorSubject<Question> = new BehaviorSubject(new Question());
-  $question: Observable<Question> = this.questionSubject.asObservable();
+  private questionSubject: BehaviorSubject<Question> = new BehaviorSubject(new Question());
+  question$: Observable<Question> = this.questionSubject.asObservable();
+
+  private submitQuestionSubject: BehaviorSubject<Question> = new BehaviorSubject(new Question());
+  submitQuestion$: Observable<Question> = this.submitQuestionSubject.asObservable();
 
   private get answers(): Answer[] {
     return this.question.answers;
@@ -33,6 +37,13 @@ export class NewQuestionPresenter {
     };
   }
 
+  private set questionType(questionType: QuestionType) {
+    this.question = {
+      ...this.question,
+      questionType
+    };
+  }
+
   newAnswer() {
     this.answers = [...this.answers, {viewValue: '', value: uuid()}];
   }
@@ -55,5 +66,18 @@ export class NewQuestionPresenter {
 
   changeStatement(statement: any) {
     this.statement = statement;
+  }
+
+  changeQuestionType(questionType: QuestionType) {
+    this.questionType = questionType;
+  }
+
+  clearQuestion() {
+    this.question = new Question();
+  }
+
+  submitQuestion() {
+    this.submitQuestionSubject.next(this.question);
+    this.clearQuestion();
   }
 }

@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {QuestionType} from '../../../../shared/models/question-type';
 import {Answer} from '../../../../shared/models/answer';
 import {NewQuestionPresenter} from './new-question.presenter';
+import {Question} from '../../../../shared/models/question';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-new-question',
@@ -9,7 +12,7 @@ import {NewQuestionPresenter} from './new-question.presenter';
   styleUrls: ['./new-question.component.scss'],
   providers: [NewQuestionPresenter]
 })
-export class NewQuestionComponent implements OnInit {
+export class NewQuestionComponent implements OnInit, OnDestroy {
 
   questionTypes = [
     {value: QuestionType.SINGLE, viewValue: 'Single response'},
@@ -17,16 +20,30 @@ export class NewQuestionComponent implements OnInit {
     {value: QuestionType.TEXT, viewValue: 'Text response'},
     {value: QuestionType.NUMBER, viewValue: 'Number response'},
   ];
+  @Output()
+  private submitQuestion: EventEmitter<Question> = new EventEmitter();
+  private destroy$: Subject<void> = new Subject();
 
   constructor(public presenter: NewQuestionPresenter) {
   }
 
   ngOnInit() {
+    this.presenter.submitQuestion$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(question => this.submitQuestion.emit(question));
+  }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onStatementChange($event: any) {
     this.presenter.changeStatement($event);
+  }
+
+  onQuestionTypeChange($event: QuestionType) {
+    this.presenter.changeQuestionType($event);
   }
 
   trackAnswers(index, answer) {
@@ -43,5 +60,9 @@ export class NewQuestionComponent implements OnInit {
 
   onRemoveAnswer(answer: Answer) {
     this.presenter.removeAnswer(answer);
+  }
+
+  onSubmitQuestion() {
+    this.presenter.submitQuestion();
   }
 }

@@ -9,7 +9,7 @@ describe('NewQuestionPresenter', () => {
   it('should create an answer when calling newAnswer', fakeAsync(() => {
     const presenter = new NewQuestionPresenter();
     let answers = null;
-    presenter.$question.subscribe(question => {
+    presenter.question$.subscribe(question => {
       answers = question.answers;
     });
     presenter.newAnswer();
@@ -22,7 +22,7 @@ describe('NewQuestionPresenter', () => {
   it('should remove an answer when calling removeAnswer', fakeAsync(() => {
     const presenter = new NewQuestionPresenter();
     let answers = null;
-    presenter.$question.subscribe(question => {
+    presenter.question$.subscribe(question => {
       answers = question.answers;
     });
     presenter.newAnswer();
@@ -36,7 +36,7 @@ describe('NewQuestionPresenter', () => {
   it('should change an answer when calling changeAnswer', fakeAsync(() => {
     const presenter = new NewQuestionPresenter();
     let answers = null;
-    presenter.$question.subscribe(question => {
+    presenter.question$.subscribe(question => {
       answers = question.answers;
     });
     presenter.newAnswer();
@@ -50,7 +50,7 @@ describe('NewQuestionPresenter', () => {
   it('should change the question\'s statement calling changeStatement', fakeAsync(() => {
     const presenter = new NewQuestionPresenter();
     let statement = '';
-    presenter.$question.subscribe(question => {
+    presenter.question$.subscribe(question => {
       statement = question.statement;
     });
     presenter.changeStatement('New statement');
