@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "fitness-tracker": {
+    "test-generator": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/fitness-tracker",
+            "outputPath": "dist/test-generator",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "fitness-tracker:build"
+            "browserTarget": "test-generator:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "fitness-tracker:build:production"
+              "browserTarget": "test-generator:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fitness-tracker:build"
+            "browserTarget": "test-generator:build"
           }
         },
         "test": {
@@ -109,15 +109,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "fitness-tracker:serve"
+            "devServerTarget": "test-generator:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "fitness-tracker:serve:production"
+              "devServerTarget": "test-generator:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "fitness-tracker"
+  "defaultProject": "test-generator"
 }

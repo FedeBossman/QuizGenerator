@@ -33,8 +33,8 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'fitness-tracker'`, () => {
-    expect(app.title).toEqual('fitness-tracker');
+  it(`should have as title 'test-generator'`, () => {
+    expect(app.title).toEqual('test-generator');
   });
 
   it('should toggle sidenav onToggleSidenav', () => {

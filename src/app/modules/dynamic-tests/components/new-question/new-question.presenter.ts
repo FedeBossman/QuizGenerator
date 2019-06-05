@@ -1,5 +1,5 @@
 import {Answer} from '../../../../shared/models/answer';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {v4 as uuid} from 'uuid';
 import {Question} from '../../../../shared/models/question';
 import {QuestionType} from '../../../../shared/models/question-type';
@@ -8,7 +8,7 @@ export class NewQuestionPresenter {
   private questionSubject: BehaviorSubject<Question> = new BehaviorSubject(new Question());
   question$: Observable<Question> = this.questionSubject.asObservable();
 
-  private submitQuestionSubject: BehaviorSubject<Question> = new BehaviorSubject(new Question());
+  private submitQuestionSubject: Subject<Question> = new Subject();
   submitQuestion$: Observable<Question> = this.submitQuestionSubject.asObservable();
 
   private get answers(): Answer[] {

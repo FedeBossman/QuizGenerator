@@ -9,7 +9,7 @@ import {MatSidenav} from '@angular/material';
 export class AppComponent {
   @ViewChild('sidenav', {static: true}) sidenav: MatSidenav;
 
-  title = 'fitness-tracker';
+  title = 'test-generator';
 
   onToggleSidenav() {
     this.sidenav.toggle();
