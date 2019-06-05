@@ -13,6 +13,7 @@ export class SidenavListComponent implements OnInit {
   links: { name: string, ref: string, icon: string }[] = [
     {name: 'Home', ref: '', icon: 'home'},
     {name: 'Create a test', ref: 'test/create', icon: 'assignment'},
+    {name: 'List tests', ref: 'test/list', icon: 'list'},
     {name: 'Login', ref: 'auth/login', icon: 'input'},
     {name: 'Signup', ref: 'auth/signup', icon: 'person_add'},
   ];
