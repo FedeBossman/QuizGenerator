@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DynamicTest} from '../../../../shared/models/dynamic-test';
 
 @Component({
@@ -12,6 +12,9 @@ export class TestsListComponent implements OnInit {
   @Input()
   tests: DynamicTest[];
 
+  @Output()
+  deleteTest: EventEmitter<DynamicTest> = new EventEmitter();
+
   displayedColumns = ['name', 'questions', 'actions'];
 
   constructor() { }
@@ -19,4 +22,7 @@ export class TestsListComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDeleteTest(test: DynamicTest) {
+    this.deleteTest.emit(test);
+  }
 }

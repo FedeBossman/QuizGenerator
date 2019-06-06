@@ -19,4 +19,10 @@ export class ListTestsComponent implements OnInit {
       .subscribe(tests => this.tests = tests);
   }
 
+  onDeleteTest(test: DynamicTest) {
+    this.testService.deleteTest(test.id)
+      .subscribe(res => {
+        this.tests = this.tests.filter(t => t.id !== test.id);
+      });
+  }
 }

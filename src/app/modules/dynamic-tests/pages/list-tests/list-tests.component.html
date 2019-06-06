@@ -4,7 +4,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <section *ngIf="tests; else spinner">
-  <app-tests-list [tests]="tests"></app-tests-list>
+  <app-tests-list [tests]="tests" (deleteTest)="onDeleteTest($event)"></app-tests-list>
 </section>
 <ng-template #spinner>
   <section fxLayout fxLayoutAlign="center center">
