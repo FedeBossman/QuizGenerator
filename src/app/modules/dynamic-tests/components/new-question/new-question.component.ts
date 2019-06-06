@@ -38,8 +38,8 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  onStatementChange($event: any) {
-    this.presenter.changeStatement($event);
+  onStatementChange(statement: string) {
+    this.presenter.changeStatement(statement);
   }
 
   onQuestionTypeChange($event: QuestionType) {
@@ -54,8 +54,8 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
     this.presenter.newAnswer();
   }
 
-  onAnswerChanged($event: any, answer: Answer) {
-    this.presenter.changeAnswer($event, answer);
+  onAnswerChanged(viewValue: string, answer: Answer) {
+    this.presenter.changeAnswer(viewValue, answer);
   }
 
   onRemoveAnswer(answer: Answer) {

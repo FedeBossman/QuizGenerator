@@ -1,6 +1,8 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
-import { ConfirmDeleteDialogComponent } from './confirm-delete-dialog.component';
+import {ConfirmDeleteDialogComponent} from './confirm-delete-dialog.component';
+import {SharedModule} from '../../../../shared/shared.module';
 
 describe('ConfirmDeleteDialogComponent', () => {
   let component: ConfirmDeleteDialogComponent;
@@ -8,9 +10,14 @@ describe('ConfirmDeleteDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmDeleteDialogComponent ]
+      imports: [SharedModule],
+      declarations: [ConfirmDeleteDialogComponent],
+      providers: [
+        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {provide: MatDialogRef, useValue: {}}
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

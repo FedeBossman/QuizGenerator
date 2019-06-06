@@ -6,6 +6,7 @@ import {DynamicTest} from '../../shared/models/dynamic-test';
 import {Question} from '../../shared/models/question';
 
 describe('DynamicTestService', () => {
+  const baseUrl = 'http://localhost:3000/api/test';
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       HttpClientTestingModule
@@ -25,7 +26,7 @@ describe('DynamicTestService', () => {
           expect(tests.length).toBe(2);
         });
         // We set the expectations for the HttpClient mock
-        const req = httpMock.expectOne('http://.../test');
+        const req = httpMock.expectOne(baseUrl);
         expect(req.request.method).toEqual('GET');
         // Then we set the fake data to be returned by the mock
         req.flush([new DynamicTest(), new DynamicTest()]);
@@ -44,12 +45,33 @@ describe('DynamicTestService', () => {
           expect(test.questions[0].statement).toBe('What\'s my age again?');
         });
         // We set the expectations for the HttpClient mock
-        const req = httpMock.expectOne('http://.../test');
+        const req = httpMock.expectOne(baseUrl);
         expect(req.request.method).toEqual('POST');
         // Then we set the fake data to be returned by the mock
         req.flush(newTest);
       })
   );
+
+  it('expects service to delete a test',
+    inject([HttpTestingController, DynamicTestService],
+      (httpMock: HttpTestingController, service: DynamicTestService) => {
+        const newTest = new DynamicTest();
+        newTest.questions = [{...new Question(), statement: 'What\'s my age again?'}];
+
+        const testId = 1;
+        const response = {};
+        // We call the service
+        service.deleteTest(testId).subscribe(test => {
+          expect(test).toBe(response);
+        });
+        // We set the expectations for the HttpClient mock
+        const req = httpMock.expectOne(`${baseUrl}/${testId}` );
+        expect(req.request.method).toEqual('DELETE');
+        // Then we set the fake data to be returned by the mock
+        req.flush(response);
+      })
+  );
+
 
   afterEach(inject([HttpTestingController], (httpMock: HttpTestingController) => {
     httpMock.verify();

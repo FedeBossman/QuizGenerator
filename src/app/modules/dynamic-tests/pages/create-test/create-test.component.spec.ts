@@ -5,6 +5,11 @@ import {SharedModule} from '../../../../shared/shared.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewQuestionComponent} from '../../components/new-question/new-question.component';
 import {TestSummaryComponent} from '../../components/test-summary/test-summary.component';
+import {DynamicTestService} from '../../../../core/services/dynamic-test.service';
+
+class DynamicTestServiceMock {
+
+}
 
 describe('CreateTestComponent', () => {
   let component: CreateTestComponent;
@@ -13,7 +18,10 @@ describe('CreateTestComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, NoopAnimationsModule],
-      declarations: [CreateTestComponent, NewQuestionComponent, TestSummaryComponent]
+      declarations: [CreateTestComponent, NewQuestionComponent, TestSummaryComponent],
+      providers: [
+        {provide: DynamicTestService, useClass: DynamicTestServiceMock}
+      ]
     })
       .compileComponents();
   }));
