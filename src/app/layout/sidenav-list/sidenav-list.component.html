@@ -1,11 +1,15 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="{{link.ref}}" *ngFor="let link of links" (click)="onNavItemClicked()">
-    <mat-icon>{{link.icon}}</mat-icon>
+  <a
+    mat-list-item
+    routerLink="{{link.ref}}" *ngFor="let link of links"
+    (click)="onNavItemClicked()"
+  >
+    <mat-icon color="accent">{{link.icon}}</mat-icon>
     <span class="nav-caption">{{ link.name }}</span>
   </a>
   <mat-list-item>
     <button mat-icon-button (click)="onNavItemClicked()">
-      <mat-icon>eject</mat-icon>
+      <mat-icon color="warn">eject</mat-icon>
       <span class="nav-caption"> Logout </span>
     </button>
   </mat-list-item>

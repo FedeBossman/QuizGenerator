@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {DynamicTestService} from '../../../../core/services/dynamic-test.service';
+import {DynamicTest} from '../../../../shared/models/dynamic-test';
 
 @Component({
   selector: 'app-list-tests',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListTestsComponent implements OnInit {
 
-  constructor() { }
+  tests: DynamicTest[];
+
+  constructor(private testService: DynamicTestService) {
+  }
 
   ngOnInit() {
+    this.testService.getTests()
+      .subscribe(tests => this.tests = tests);
   }
 
 }

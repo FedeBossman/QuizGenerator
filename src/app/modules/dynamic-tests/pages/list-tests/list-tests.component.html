@@ -1,3 +1,13 @@
-<p>
-  list-tests works!
-</p>
+<mat-toolbar>
+  <mat-toolbar-row>
+    List of tests
+  </mat-toolbar-row>
+</mat-toolbar>
+<section *ngIf="tests; else spinner">
+  <app-tests-list [tests]="tests"></app-tests-list>
+</section>
+<ng-template #spinner>
+  <section fxLayout fxLayoutAlign="center center">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </section>
+</ng-template>

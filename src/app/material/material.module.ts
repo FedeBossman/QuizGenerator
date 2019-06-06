@@ -9,10 +9,14 @@ import {
   MatInputModule,
   MatListModule,
   MatNativeDateModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatSelectModule,
   MatSidenavModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatSelectModule, MatRadioModule, MatTooltipModule, MatTableModule,
+  MatTooltipModule,
 } from '@angular/material';
 
 @NgModule({
@@ -33,6 +37,7 @@ import {
     MatRadioModule,
     MatTooltipModule,
     MatTableModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     MatButtonModule,
@@ -51,6 +56,7 @@ import {
     MatRadioModule,
     MatTooltipModule,
     MatTableModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule {
