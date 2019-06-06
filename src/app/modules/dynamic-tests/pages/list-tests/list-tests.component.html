@@ -7,7 +7,7 @@
   <app-tests-list [tests]="tests" (deleteTest)="onDeleteTest($event)"></app-tests-list>
 </section>
 <ng-template #spinner>
-  <section fxLayout fxLayoutAlign="center center">
+  <section class="spinner" fxLayout fxLayoutAlign="center center">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   </section>
 </ng-template>
