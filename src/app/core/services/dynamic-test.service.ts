@@ -48,10 +48,10 @@ export class DynamicTestService {
       let errorMessage = '';
       if (error.error instanceof ErrorEvent) {
         // client-side error
-        errorMessage = `Error: ${error.error.message}`;
+        errorMessage = `Error (${operation}): ${error.error.message}`;
       } else {
         // server-side error
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        errorMessage = `Error Code (${operation}): ${error.status}\nMessage: ${error.message}`;
       }
       // TODO: send the error to remote logging infrastructure
       console.error(errorMessage); // log to console instead

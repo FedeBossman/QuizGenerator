@@ -40,11 +40,13 @@ describe('NewQuestionPresenter', () => {
       answers = question.answers;
     });
     presenter.newAnswer();
+    presenter.newAnswer();
     tick();
-    expect(answers.length).toBe(1);
+    expect(answers.length).toBe(2);
     presenter.changeAnswer('Answer value', answers[0]);
     tick();
     expect(answers[0].viewValue).toBe('Answer value');
+    expect(answers.length).toBe(2);
   }));
 
   it('should change the question\'s statement calling changeStatement', fakeAsync(() => {

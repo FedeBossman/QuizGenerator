@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {DynamicTest} from '../../../../shared/models/dynamic-test';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {ConfirmDeleteDialogComponent} from '../confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
@@ -18,6 +18,7 @@ export class TestsListComponent implements OnInit {
   deleteTest: EventEmitter<DynamicTest> = new EventEmitter();
 
   displayedColumns = ['name', 'questions', 'actions'];
+  dialogRef: MatDialogRef<ConfirmDeleteDialogComponent, any>;
 
   constructor(private dialog: MatDialog) {
   }
@@ -26,15 +27,16 @@ export class TestsListComponent implements OnInit {
   }
 
   onDeleteTest(test: DynamicTest) {
-    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+    this.dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
       data: test.name,
     });
 
-    dialogRef.afterClosed()
+    this.dialogRef.afterClosed()
       .subscribe(result => {
         if (result) {
           this.deleteTest.emit(test);
         }
+        this.dialogRef = null;
       });
   }
 }
