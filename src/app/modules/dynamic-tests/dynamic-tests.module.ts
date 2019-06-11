@@ -8,6 +8,7 @@ import {TestSummaryComponent} from './components/test-summary/test-summary.compo
 import {ListTestsComponent} from './pages/list-tests/list-tests.component';
 import {TestsListComponent} from './components/tests-list/tests-list.component';
 import {ConfirmDeleteDialogComponent} from './components/confirm-delete-dialog/confirm-delete-dialog.component';
+import {ConfirmSaveDialogComponent} from './components/confirm-save-dialog/confirm-save-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,17 @@ import {ConfirmDeleteDialogComponent} from './components/confirm-delete-dialog/c
     TestSummaryComponent,
     ListTestsComponent,
     TestsListComponent,
-    ConfirmDeleteDialogComponent
+    ConfirmDeleteDialogComponent,
+    ConfirmSaveDialogComponent
   ],
   imports: [
     SharedModule,
     DynamicTestsRoutingModule
   ],
-  entryComponents: [ConfirmDeleteDialogComponent]
+  entryComponents: [
+    ConfirmDeleteDialogComponent,
+    ConfirmSaveDialogComponent,
+  ]
 })
 export class DynamicTestsModule {
 }
