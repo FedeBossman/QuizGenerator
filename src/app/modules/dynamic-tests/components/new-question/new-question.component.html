@@ -2,65 +2,66 @@
   <mat-card fxFlex.xs="100%" fxFlex.gt-sm="450px">
     <mat-card-title>Configure</mat-card-title>
     <mat-card-subtitle>Set up your question</mat-card-subtitle>
-    <mat-card-content fxLayout="column">
-      <mat-form-field>
-        <mat-label>Statement</mat-label>
-        <input
-          type="text" matInput autocomplete="off"
-          [ngModel]="(presenter.question$ | async).statement"
-          (ngModelChange)="onStatementChange($event)"
-        >
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Question type</mat-label>
-        <mat-select
-          [ngModel]="(presenter.question$ | async).questionType"
-          (ngModelChange)="onQuestionTypeChange($event)"
-        >
-          <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.value">
-            {{questionType.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-card-content>
+      <form [formGroup]="questionForm" fxLayout="column">
+        <mat-form-field>
+          <mat-label>Statement</mat-label>
+          <input
+            type="text" matInput autocomplete="off" required
+            formControlName="statement"
+          >
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Question type</mat-label>
+          <mat-select
+            formControlName="questionType"
+          >
+            <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.value">
+              {{questionType.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <div fxLayout fxLayoutAlign="space-between center">
-        <span>Answers</span>
-        <button type="button" mat-button (click)="onAddAnswer()">
-          Add answer
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
+        <div fxLayout fxLayoutAlign="space-between center">
+          <span>Answers</span>
+          <button type="button" mat-button (click)="onAddAnswer()">
+            Add answer
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
 
-      <mat-form-field *ngFor="let answer of (presenter.question$ | async).answers; trackBy: trackAnswers">
-        <input
-          matInput
-          [ngModel]="answer.viewValue"
-          (ngModelChange)="onAnswerChanged($event, answer)"
-        >
-        <button
-          mat-icon-button matSuffix [attr.aria-label]="'Remove answer'"
-          matTooltip="Remove answer"
-          matTooltipPosition="below"
-          (click)="onRemoveAnswer(answer)"
-        >
-          <mat-icon>remove</mat-icon>
-        </button>
-      </mat-form-field>
-
+        <div formArrayName="answers" fxLayout="column">
+          <mat-form-field *ngFor="let answer of answers.controls; let i=index">
+            <input
+              matInput
+              type="text"
+              [formControlName]="i"
+            >
+            <button
+              mat-icon-button matSuffix [attr.aria-label]="'Remove answer'"
+              matTooltip="Remove answer"
+              matTooltipPosition="below"
+              (click)="onRemoveAnswer(i)"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+      </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button (click)="onSubmitQuestion()">SUBMIT</button>
+      <button mat-button (click)="onSubmitQuestion()" [disabled]="!questionForm.valid">SUBMIT</button>
     </mat-card-actions>
   </mat-card>
 
   <div fxFlex.xs="100%" fxFlex.gt-sm="450px">
     <mat-card>
       <mat-card-title>Preview</mat-card-title>
-      <mat-card-subtitle>{{(presenter.question$ | async).statement}}</mat-card-subtitle>
+      <mat-card-subtitle>{{statement.value}}</mat-card-subtitle>
       <mat-card-content>
         <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="16px">
-          <mat-radio-button *ngFor="let answer of (presenter.question$ | async).answers" [value]="answer.value">
-            {{answer.viewValue}}
+          <mat-radio-button *ngFor="let answer of answers.controls; let i=index" [value]="i">
+            {{answer.value}}
           </mat-radio-button>
         </mat-radio-group>
       </mat-card-content>
