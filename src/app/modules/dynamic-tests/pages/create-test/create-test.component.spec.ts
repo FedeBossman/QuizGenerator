@@ -82,7 +82,7 @@ describe('CreateTestComponent', () => {
     const routerSpy = spyOn(router, 'navigate').and.callThrough();
     component.saveTest('TestTest');
     // expect(spy).toHaveBeenCalled();
-    expect(routerSpy).toHaveBeenCalledWith(['/test/list']);
+    expect(routerSpy).not.toHaveBeenCalled();
   });
 
 
