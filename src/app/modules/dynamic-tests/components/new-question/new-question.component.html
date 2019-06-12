@@ -57,7 +57,7 @@
   <div fxFlex.xs="100%" fxFlex.gt-sm="450px">
     <mat-card>
       <mat-card-title>Preview</mat-card-title>
-      <mat-card-subtitle>{{statement.value}}</mat-card-subtitle>
+      <mat-card-subtitle>{{this.questionForm.get('statement').value}}</mat-card-subtitle>
       <mat-card-content>
         <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="16px">
           <mat-radio-button *ngFor="let answer of answers.controls; let i=index" [value]="i">

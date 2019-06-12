@@ -5,4 +5,11 @@ export class Question {
   statement = '';
   questionType: QuestionType = QuestionType.SINGLE;
   answers: Answer[] = [];
+
+  static fromRawForm(formValue: any): Question {
+    return {
+      ...formValue,
+      answers: formValue.answers.map(a => Answer.fromRawForm(a))
+    } as Question;
+  }
 }
