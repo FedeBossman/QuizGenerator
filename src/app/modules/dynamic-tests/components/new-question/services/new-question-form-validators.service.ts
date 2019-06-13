@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
-import {FormArray, ValidatorFn} from '@angular/forms';
+import {Injectable} from '@angular/core';
+import {FormArray, FormGroup, ValidatorFn} from '@angular/forms';
+import {QuestionType} from '../../../../../shared/models/question-type';
 
 @Injectable()
 export class NewQuestionFormValidatorsService {
 
-  constructor() { }
+  constructor() {
+  }
 
   noAnswersValidator(): ValidatorFn {
-    return (control: FormArray): {[key: string]: any} | null => {
-      const hasAnswers = control.controls.length > 0;
-      return !hasAnswers ? {noAnswers: {value: control.controls.length}} : null;
+    return (control: FormGroup): { [key: string]: any } | null => {
+      const questionType = control.get('questionType');
+      const answers = control.get('answers') as FormArray;
+      const isMulti = (questionType.value === QuestionType.MULTI || questionType.value === QuestionType.SELECT);
+      const shouldHaveAnswers = (isMulti && answers.length === 0);
+      return shouldHaveAnswers ? {noAnswers: {value: answers.length}} : null;
     };
   }
 }

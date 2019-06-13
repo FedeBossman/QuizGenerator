@@ -40,7 +40,6 @@ export class NewQuestionFormService {
         if (!this.isMultiAnswer) {
           this.clearAnswers();
         } else if (this.answers.length < 1) {
-          console.log('adding answer', this.answers.length, this.isMultiAnswer, this.questionType);
           this.addAnswer();
         }
       });
@@ -50,7 +49,9 @@ export class NewQuestionFormService {
     this.questionForm = this.fb.group({
       statement: ['', [Validators.required]],
       questionType: ['', [Validators.required]],
-      answers: this.fb.array([], this.validatorService.noAnswersValidator())
+      answers: this.fb.array([])
+    }, {
+      validators: this.validatorService.noAnswersValidator()
     });
   }
 
