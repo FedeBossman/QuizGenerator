@@ -1,45 +1,56 @@
-import { NewQuestionPresenter } from './new-question.presenter';
-import {async, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {NewQuestionPresenter} from './new-question.presenter';
+import {fakeAsync, tick} from '@angular/core/testing';
 import {NewQuestionFormService} from './services/new-question-form.service';
-import {FormBuilder} from '@angular/forms';
-import {NewQuestionFormValidatorsService} from './services/new-question-form-validators.service';
 import {QuestionType} from '../../../../shared/models/question-type';
 
-describe('NewQuestionPresenter', () => {
-  let formService: NewQuestionFormService;
-  let formBuilder: FormBuilder;
+class StubNewQuestionFormService {
+  get isValid() {
+    return true;
+  }
 
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [NewQuestionPresenter, NewQuestionFormService, FormBuilder, NewQuestionFormValidatorsService]
-  }));
+  get questionForm() {
+    return {
+      getRawValue(): any {
+        return {
+          statement: 'TestQuestion',
+          questionType: QuestionType.MULTI,
+          answers: ['answer1', 'answer2']
+        };
+      }
+    };
+  }
+
+  resetForm() {
+  }
+}
+
+describe('NewQuestionPresenter', () => {
+  let presenter: NewQuestionPresenter;
+  let formService: NewQuestionFormService;
 
   beforeEach(() => {
-    formService = TestBed.get(NewQuestionFormService);
-    formBuilder = TestBed.get(FormBuilder);
+    formService = new StubNewQuestionFormService() as NewQuestionFormService;
+    presenter = new NewQuestionPresenter(formService);
   });
 
   it('should be created', () => {
-    const service: NewQuestionPresenter = TestBed.get(NewQuestionPresenter);
-    expect(service).toBeTruthy();
+    expect(presenter).toBeTruthy();
   });
 
+  it('should reset form if the form is valid', (() => {
+    const spy = spyOn(formService, 'resetForm').and.callThrough();
+    presenter.submitQuestion();
+    expect(spy).toHaveBeenCalled();
+  }));
 
   it('should not reset form if the form is not valid', (() => {
-    const presenter: NewQuestionPresenter = TestBed.get(NewQuestionPresenter);
+    spyOnProperty(formService, 'isValid').and.returnValue(false);
     const spy = spyOn(formService, 'resetForm').and.callThrough();
     presenter.submitQuestion();
     expect(spy).not.toHaveBeenCalled();
   }));
 
   it('should emit a Question when calling submitQuestion', fakeAsync(() => {
-    const presenter: NewQuestionPresenter = TestBed.get(NewQuestionPresenter);
-    formService.questionForm.patchValue({
-      statement: 'TestQuestion',
-      questionType: QuestionType.MULTI
-    });
-    formService.answers.push(formBuilder.control('answer1'));
-    formService.answers.push(formBuilder.control('answer2'));
-
     let answers = null;
     presenter.submitQuestion$.subscribe(question => {
       answers = question.answers;
@@ -48,14 +59,5 @@ describe('NewQuestionPresenter', () => {
     tick();
     expect(answers.length).toBe(2);
     expect(answers[0].viewValue).toBe('answer1');
-
-    formService.questionForm.patchValue({
-      statement: 'TestQuestion',
-      questionType: QuestionType.MULTI
-    });
-    formService.answers.push(formBuilder.control('answer1'));
-    presenter.submitQuestion();
-    tick();
-    expect(answers.length).toBe(1);
   }));
 });

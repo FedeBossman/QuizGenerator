@@ -3,7 +3,7 @@ import {Answer} from './answer';
 
 export class Question {
   statement = '';
-  questionType: QuestionType = QuestionType.SINGLE;
+  questionType: QuestionType = QuestionType.SELECT;
   answers: Answer[] = [];
 
   static fromRawForm(formValue: any): Question {

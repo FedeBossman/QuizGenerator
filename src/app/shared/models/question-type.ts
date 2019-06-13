@@ -1,6 +1,6 @@
 export enum QuestionType {
-  SINGLE,
-  MULTI,
-  TEXT,
-  NUMBER,
+  SELECT = 'select',
+  MULTI = 'multi-select',
+  TEXT = 'text',
+  NUMBER = 'number',
 }

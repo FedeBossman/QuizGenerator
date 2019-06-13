@@ -28,12 +28,20 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
     return this.formService.questionForm;
   }
 
+  get questionTypes(): {value: QuestionType, viewValue: string}[] {
+    return this.formService.questionTypes;
+  }
+
   get answers(): FormArray {
     return this.formService.answers;
   }
 
-  get questionTypes(): {value: QuestionType, viewValue: string}[] {
-    return this.formService.questionTypes;
+  get questionType(): QuestionType {
+    return this.formService.questionType.value;
+  }
+
+  get isMultiAnswer(): boolean {
+    return this.formService.isMultiAnswer;
   }
 
   constructor(private presenter: NewQuestionPresenter, private formService: NewQuestionFormService) {

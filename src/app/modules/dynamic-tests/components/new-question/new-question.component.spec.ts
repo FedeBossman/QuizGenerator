@@ -5,6 +5,7 @@ import {SharedModule} from '../../../../shared/shared.module';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {NewQuestionPresenter} from './new-question.presenter';
 import {NewQuestionFormService} from './services/new-question-form.service';
+import {QuestionType} from '../../../../shared/models/question-type';
 
 describe('NewQuestionComponent', () => {
   let component: NewQuestionComponent;
@@ -34,12 +35,14 @@ describe('NewQuestionComponent', () => {
 
   it('should call presenters newAnswer with statement value onAddAnswer', () => {
     const spy = spyOn(formService, 'addAnswer').and.callThrough();
+    spyOnProperty(formService, 'isMultiAnswer').and.returnValue(true);
     component.onAddAnswer();
     expect(component.answers.controls.length).toBe(1);
     expect(spy).toHaveBeenCalled();
   });
 
   it('should call presenters removeAnswer with statement value onRemoveAnswer', () => {
+    spyOnProperty(formService, 'isMultiAnswer').and.returnValue(true);
     component.onAddAnswer();
     component.onAddAnswer();
     expect(component.answers.controls.length).toBe(2);
