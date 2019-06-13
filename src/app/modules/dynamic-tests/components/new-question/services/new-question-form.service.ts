@@ -65,7 +65,7 @@ export class NewQuestionFormService {
     if (!this.isMultiAnswer) {
       return;
     }
-    this.answers.push(this.fb.control(''));
+    this.answers.push(this.fb.control('', Validators.required));
   }
 
   removeAnswer(answerIndex: number) {
