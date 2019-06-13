@@ -8,7 +8,7 @@ import {TestSummaryComponent} from '../../components/test-summary/test-summary.c
 import {DynamicTestService} from '../../../../core/services/dynamic-test.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {DynamicTest} from '../../../../shared/models/dynamic-test';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material';
 import {Question} from '../../../../shared/models/question';
@@ -77,11 +77,11 @@ describe('CreateTestComponent', () => {
     expect(routerSpy).toHaveBeenCalledWith(['/test/list']);
   });
 
-  xit('should not create test and not navigate to test list', () => {
-    // const spy = spyOn(testService, 'addTest').and.callFake(throwError(new Error('Testing error stub')));
+  it('should not create test and not navigate to test list', () => {
+    const spy = spyOn(testService, 'addTest').and.returnValue(throwError('Testing error stub'));
     const routerSpy = spyOn(router, 'navigate').and.callThrough();
     component.saveTest('TestTest');
-    // expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
     expect(routerSpy).not.toHaveBeenCalled();
   });
 
