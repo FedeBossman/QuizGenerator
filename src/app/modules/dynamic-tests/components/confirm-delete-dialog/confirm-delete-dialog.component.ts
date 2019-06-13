@@ -7,5 +7,8 @@ import {MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./confirm-delete-dialog.component.scss']
 })
 export class ConfirmDeleteDialogComponent {
+  get name() {
+    return this.passedData;
+  }
   constructor(@Inject(MAT_DIALOG_DATA) private passedData: any) { }
 }
