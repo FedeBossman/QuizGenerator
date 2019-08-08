@@ -3,9 +3,10 @@ import {CommonModule} from '@angular/common';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from '../material/material.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MaskedInputDirective } from './directives/masked-input.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [MaskedInputDirective],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -19,6 +20,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    MaskedInputDirective,
   ]
 })
 export class SharedModule {

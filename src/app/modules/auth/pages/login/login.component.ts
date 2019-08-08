@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {NgControl, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +8,50 @@ import {NgForm} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('maskedSsnInput', {static: true})
+  maskedSsnInput: NgControl;
+
+  mask = {
+    ssn: [
+      /[\w|*]/,
+      /[\w|*]/,
+      /[\w|*]/,
+      '-',
+      /[\w|*]/,
+      /[\w|*]/,
+      '-',
+      /[\w|*]/,
+      /[\w|*]/,
+      /[\w|*]/,
+      /[\w|*]/,
+    ]
+  };
+  maskConfig = {
+    mask: this.mask.ssn,
+    guide: false,
+  };
+
+  maskConfig2 = {
+    mask: this.mask.ssn,
+    guide: false,
+  };
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.maskedSsnInput.control.valueChanges.subscribe((val) => {
+      const newVal = [];
+      for (const v of val) {
+        const regex = /\d/g;
+        if (regex.test(v)) {
+          newVal.push('*');
+        } else {
+          newVal.push(v);
+        }
+      }
+      this.maskedSsnInput.valueAccessor.writeValue(newVal.join(''));
+    });
   }
 
   onSubmit(form: NgForm) {

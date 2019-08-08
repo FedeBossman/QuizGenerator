@@ -2,6 +2,30 @@
   <form fxLayout="column" fxLayoutAlign="center center" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     <mat-form-field>
       <input
+        matInput type="masked" appMaskedInput
+        ngModel #maskedInput="ngModel"
+        placeholder="Your masked input" name="masked"
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        [textMask]="maskConfig"
+        placeholder="Text Mask"
+        ngModel #maskedSsnInput="ngModel" name="maskedSsn"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        [textMask]="maskConfig2"
+        appMaskedInput
+        placeholder="COMBO"
+        ngModel #maskedSsnComboInput="ngModel" name="maskedSsnCombo"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
         matInput type="email"
         ngModel #emailInput="ngModel"
         placeholder="Your email" name="email" email required
