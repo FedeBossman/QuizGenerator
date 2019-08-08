@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NgControl, NgForm} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +7,6 @@ import {NgControl, NgForm} from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  @ViewChild('maskedSsnInput', {static: true})
-  maskedSsnInput: NgControl;
-
   mask = {
     ssn: [
       /[\w|*]/,
@@ -26,12 +22,8 @@ export class LoginComponent implements OnInit {
       /[\w|*]/,
     ]
   };
-  maskConfig = {
-    mask: this.mask.ssn,
-    guide: false,
-  };
 
-  maskConfig2 = {
+  maskConfig = {
     mask: this.mask.ssn,
     guide: false,
   };
@@ -40,21 +32,16 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.maskedSsnInput.control.valueChanges.subscribe((val) => {
-      const newVal = [];
-      for (const v of val) {
-        const regex = /\d/g;
-        if (regex.test(v)) {
-          newVal.push('*');
-        } else {
-          newVal.push(v);
-        }
-      }
-      this.maskedSsnInput.valueAccessor.writeValue(newVal.join(''));
-    });
   }
 
   onSubmit(form: NgForm) {
     console.log(form);
+  }
+
+  maskField(value: string): string {
+    const chars = value.split('');
+    const limit = Math.min(6, chars.length);
+    // Replace initial characters with asterisks
+    return chars.map((val, index) => (index !== 3 && index < limit) ? '*' : val).join('');
   }
 }
