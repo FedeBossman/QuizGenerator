@@ -13,7 +13,8 @@ export class MaskedInputDirective {
   @Input()
   appMaskedInput: ((value: string) => string);
 
-  constructor(@Self() private ngControl: NgControl, private el: ElementRef) {}
+  constructor(@Self() private ngControl: NgControl, private el: ElementRef) {
+  }
 
   /**
    * Check for keydown in cases that do not work with keypress
@@ -41,20 +42,27 @@ export class MaskedInputDirective {
   /**
    * On input, alter the value input by user to mask it.
    * Store the original value to reset on keypress
+   * @param $event - Input event
    */
-  @HostListener('input') inputEvent() {
+  @HostListener('input', ['$event']) inputEvent($event) {
     // Check if the value changed to process it
-    if (this.ngControl.value !== this.originalValue) {
+    if ($event.isComposing && this.ngControl.value === this.originalValue) {
+      console.log('Composing event occurring in input', this.originalValue, this.ngControl.value, $event);
+    } else if (this.ngControl.value !== this.originalValue) {
       // Store value before changing it
       this.originalValue = this.ngControl.value;
-      console.log('input', this.originalValue);
+      console.log('input with new value', this.originalValue, this.ngControl.value, $event);
+
       // Create new masked value
       this.maskedValue = this.maskValue(this.originalValue);
+
+      // Set the masked value without changing the NgForm
+      this.writeValueAndKeepCursors(this.maskedValue);
     } else {
-      console.log('No changes in input', this.originalValue);
+      console.log('No changes in input', this.originalValue, $event);
+      // Set the masked value without changing the NgForm
+      this.writeValueAndKeepCursors(this.maskedValue);
     }
-    // Set the masked value without changing the NgForm
-    this.writeValueAndKeepCursors(this.maskedValue);
   }
 
   /**
