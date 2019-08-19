@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {Routes, RouterModule, RouteReuseStrategy} from '@angular/router';
+import {ReloadRouteReuseStrategy} from './core/routing/reload-route-reuse-strategy';
 
 const routes: Routes = [
   {
@@ -25,8 +26,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  exports: [RouterModule],
+  providers: [{provide: RouteReuseStrategy, useClass: ReloadRouteReuseStrategy}]
 })
 export class AppRoutingModule {
 }
