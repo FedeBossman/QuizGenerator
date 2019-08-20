@@ -56,6 +56,7 @@
   },
   "husky": {
     "hooks": {
+      "pre-commit": "ng lint && ng test --watch=false --code-coverage",
       "pre-push": "ng lint && ng build --aot true && ng test --watch=false --code-coverage"
     }
   }
