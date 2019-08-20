@@ -25,4 +25,10 @@ describe('LoginComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('maskInput method', () => {
+    it('should mask 1234567 into ****-*7', () => {
+      expect(component.maskField('1234567')).toBeTruthy('****-*7');
+    });
+  });
 });
